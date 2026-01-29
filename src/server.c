@@ -6,7 +6,7 @@
 /*   By: zatalbi <zatalbi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 21:31:57 by zatalbi           #+#    #+#             */
-/*   Updated: 2025/04/19 18:42:21 by zatalbi          ###   ########.fr       */
+/*   Updated: 2026/01/29 20:55:55 by zatalbi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 
 	(void)argv;
 	if (argc != 1)
-		exit(0);
+		return (0);
 	ft_putnbr(getpid());
 	write(1, "\n", 1);
 	ft_mask(&sa.sa_mask);
@@ -54,5 +54,5 @@ int	main(int argc, char **argv)
 	ft_sigaction(&sa);
 	while (1)
 		pause();
-	exit(0);
+	return (0);
 }

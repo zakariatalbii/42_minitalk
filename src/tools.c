@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_bonus.c                                      :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zatalbi <zatalbi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 08:47:25 by zatalbi           #+#    #+#             */
-/*   Updated: 2025/04/05 11:55:38 by zatalbi          ###   ########.fr       */
+/*   Updated: 2026/01/29 21:02:41 by zatalbi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 int	ft_atoi(const char *str)
 {
@@ -19,21 +19,18 @@ int	ft_atoi(const char *str)
 
 	sign = 1;
 	num = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\n'
-		|| *str == '\v' || *str == '\r' || *str == '\f')
+	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
-	if (*str == '+')
-		str++;
-	else if (*str == '-')
+	if (*str == '+' || *str == '-')
 	{
-		sign = -1;
+		sign = (*str == '+') - (*str == '-');
 		str++;
 	}
 	while (*str >= '0' && *str <= '9')
 	{
 		if (sign == 1 && num > (num * 10 + (*str - 48)))
 			return (-1);
-		else if (sign == -1 && (-num) < ((-num) * 10 - (*str - 48)))
+		else if (sign == -1 && - num < (-num * 10 - (*str - 48)))
 			return (0);
 		num = num * 10 + (*str++ - 48);
 	}
@@ -45,7 +42,7 @@ void	ft_putnbr(int n)
 {
 	char	c;
 
-	if (n == -2147483648)
+	if (n == INT_MIN)
 	{
 		c = -(n % 10) + '0';
 		ft_putnbr(n / 10);

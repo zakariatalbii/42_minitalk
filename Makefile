@@ -1,54 +1,51 @@
-HDR = minitalk.h
+SRC_S = src/server.c src/tools.c
+SRC_C = src/client.c src/tools.c
 
-SSRC = server.c tools.c
-CSRC = client.c tools.c
+OBJ_S = $(SRC_S:.c=.o)
+OBJ_C = $(SRC_C:.c=.o)
 
-SOBJ =	$(SSRC:.c=.o)
-COBJ =	$(CSRC:.c=.o)
+NAME = server
+NAME_C = client
 
-NAME =	server
-CNAME =	client
+SRC_S_B = bonus/src/server_bonus.c bonus/src/tools_bonus.c
+SRC_C_B = bonus/src/client_bonus.c bonus/src/tools_bonus.c
 
-HDR_B = minitalk_bonus.h
+OBJ_S_B = $(SRC_S_B:.c=.o)
+OBJ_C_B = $(SRC_C_B:.c=.o)
 
-SSRC_B = server_bonus.c tools_bonus.c
-CSRC_B = client_bonus.c tools_bonus.c
+NAME_B = server_bonus
+NAME_C_B = client_bonus
 
-SOBJ_B = $(SSRC_B:.c=.o)
-COBJ_B = $(CSRC_B:.c=.o)
+CC = cc -Wall -Wextra -Werror
 
-NAME_B =	server_bonus
-CNAME_B =	client_bonus
+RM = rm -f
 
-CC =	cc -Wall -Wextra -Werror
-RM =	rm -f
+%_bonus.o: %_bonus.c bonus/include/minitalk_bonus.h
+	$(CC) -c $< -Ibonus/include -o $@
 
-%.o: %.c $(HDR)
-	$(CC) -c $< -o $@
+%.o: %.c include/minitalk.h
+	$(CC) -c $< -Iinclude -o $@
 
-%_bonus.o: %_bonus.c $(HDR_B)
-	$(CC) -c $< -o $@
+all: $(NAME) $(NAME_C)
 
-all: $(NAME) $(CNAME)
+$(NAME): $(OBJ_S)
+	$(CC) $(OBJ_S) -o $(NAME)
 
-bonus: $(NAME_B) $(CNAME_B)
+$(NAME_C): $(OBJ_C)
+	$(CC) $(OBJ_C) -o $(NAME_C)
 
-$(NAME): $(SOBJ)
-	$(CC) $(SOBJ) -o $(NAME)
+bonus: $(NAME_B) $(NAME_C_B)
 
-$(CNAME): $(COBJ)
-	$(CC) $(COBJ) -o $(CNAME)
+$(NAME_B): $(OBJ_S_B)
+	$(CC) $(OBJ_S_B) -o $(NAME_B)
 
-$(NAME_B): $(SOBJ_B)
-	$(CC) $(SOBJ_B) -o $(NAME_B)
-
-$(CNAME_B): $(COBJ_B)
-	$(CC) $(COBJ_B) -o $(CNAME_B)
+$(NAME_C_B): $(OBJ_C_B)
+	$(CC) $(OBJ_C_B) -o $(NAME_C_B)
 
 clean:
-	$(RM) $(SOBJ) $(COBJ) $(SOBJ_B) $(COBJ_B)
+	$(RM) $(OBJ_S) $(OBJ_C) $(OBJ_S_B) $(OBJ_C_B)
 
 fclean: clean
-	$(RM) $(NAME) $(CNAME) $(NAME_B) $(CNAME_B)
+	$(RM) $(NAME) $(NAME_C) $(NAME_B) $(NAME_C_B)
 
 re: fclean all
