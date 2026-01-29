@@ -37,6 +37,8 @@ The handler:
 - Rebuilds characters
 - Prints characters once a full byte is received
 
+---
+
 ### 💻 Client Message Encoding
 
 The client:
@@ -51,6 +53,8 @@ Each bit:
 
 A small delay (`usleep`) is used to prevent signal loss.
 
+---
+
 ### 🔁 Bit Reconstruction (Server Side)
 
 On the server:
@@ -61,6 +65,8 @@ On the server:
 	- Internal state is reset
 
 This ensures deterministic decoding.
+
+---
 
 ### 🧩 Synchronization Model
 
@@ -85,6 +91,8 @@ The bonus version improves reliability by introducing **acknowledgements**.
 	- No signal loss
 	- Proper synchronization between processes
 
+---
+
 ### 🧠 Bonus Message Flow
 
 1. Client sends one bit
@@ -103,19 +111,19 @@ git clone git@github.com:zakariatalbii/42_minitalk.git
 cd 42_minitalk
 ```
 
-### 🔨 Compile
+🔨 Compile
 
 ```bash
 make
 ```
 
-### ▶️ Run Server
+▶️ Run Server
 
 ```bash
 ./server
 ```
 
-### ▶️ Run Client
+▶️ Run Client
 
 ```bash
 ./client <SERVER_PID> "Hello World!"
@@ -189,4 +197,4 @@ The logic is clearly separated between:
 
 ## 📜 License
 
-This project is part of the 42 School curriculum.
+This project is part of the 42 School cursus.
