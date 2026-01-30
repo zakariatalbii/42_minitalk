@@ -106,6 +106,18 @@ This turns the communication into a **handshaked protocol**.
 
 ## 🚀 Compilation & Usage
 
+The project includes a Makefile with the following rules:
+
+```bash
+make		# Mandatory version
+make bonus	# Bonus version
+make clean	# Remove object files
+make fclean	# Remove everything
+make re		# Recompile
+```
+
+🔧 Usage
+
 ```bash
 git clone git@github.com:zakariatalbii/42_minitalk.git
 cd 42_minitalk
